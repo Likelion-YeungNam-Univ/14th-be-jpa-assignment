@@ -1,0 +1,29 @@
+package com.likelion.likelion_7th.domain.attachment.entity;
+
+import com.likelion.likelion_7th.domain.board.entity.Board;
+import com.likelion.likelion_7th.global.BaseEntity;
+import jakarta.persistence.*;
+import lombok.Getter;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+public class Attachment extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long fileId;
+
+    @Column(nullable = false, length = 255)
+    private String originalName; // 원본 이름
+
+    @Column(nullable = false, length = 255)
+    private String storedName; // 저장 이름
+
+    @Column(nullable = false, length = 512)
+    private String filePath; // 파일 경로
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+}
