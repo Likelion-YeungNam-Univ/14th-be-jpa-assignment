@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false, length = 20)
     private String username;
 
-    @Column(nullable = false, length = 60) // 해시 암호화를 고려해 60자로 설정
+    @Column(nullable = false, length = 60)
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
