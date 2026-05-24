@@ -3,12 +3,11 @@ package com.likelion.likelion_7th.domain.attachment.entity;
 import com.likelion.likelion_7th.domain.board.entity.Board;
 import com.likelion.likelion_7th.global.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-
-import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Attachment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +25,12 @@ public class Attachment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
+
+    @Builder
+    public Attachment(String originalName, String storedName, String filePath, Board board) {
+        this.originalName = originalName;
+        this.storedName = storedName;
+        this.filePath = filePath;
+        this.board = board;
+    }
 }

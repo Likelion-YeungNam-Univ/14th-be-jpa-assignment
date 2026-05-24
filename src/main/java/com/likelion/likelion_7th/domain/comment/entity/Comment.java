@@ -4,12 +4,11 @@ import com.likelion.likelion_7th.domain.board.entity.Board;
 import com.likelion.likelion_7th.domain.users.entity.User;
 import com.likelion.likelion_7th.global.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-
-import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +24,15 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public Comment(String content, Board board, User user) {
+        this.content = content;
+        this.board = board;
+        this.user = user;
+    }
+
+    public void update(String content) {
+        this.content = content;
+    }
 }

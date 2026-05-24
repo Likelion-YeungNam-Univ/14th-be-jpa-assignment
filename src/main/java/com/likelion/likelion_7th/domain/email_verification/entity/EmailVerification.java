@@ -1,13 +1,13 @@
 package com.likelion.likelion_7th.domain.email_verification.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class EmailVerification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,4 +24,12 @@ public class EmailVerification {
 
     @Column(nullable = false)
     private LocalDateTime expiredAt; // 만료 시간
+
+    @Builder
+    public EmailVerification(String email, String authCode, boolean isVerified, LocalDateTime expiredAt) {
+        this.email = email;
+        this.authCode = authCode;
+        this.isVerified = isVerified;
+        this.expiredAt = expiredAt;
+    }
 }
