@@ -1,9 +1,7 @@
 package com.likelion.likelion_7th.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +9,8 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@AllArgsConstructor
+@Builder
 public class Category {
 
     @Id
@@ -18,7 +18,7 @@ public class Category {
     @Column(name = "category_id")
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -8,15 +8,18 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Comment {
+public class SubTodo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
+    @Column(name = "subtodo_id")
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String remark;
+    @Column(nullable = false, length = 50)
+    private String title;
+
+    @Column(nullable = false)
+    private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_id", nullable = false)
