@@ -24,12 +24,12 @@ public class TodoController {
     }
 
     // 투두 목록 조회(카테고리 아이디)
-    @GetMapping("/{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<TodoResDto>> getTodo(@PathVariable Long categoryId) {
         return ResponseEntity.ok(todoService.getTodo(categoryId));
     }
     // 투두 목록 조회(유저 아이디)
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<TodoResDto>> getTodos(@PathVariable Long userId) {
         return ResponseEntity.ok(todoService.getTodos(userId));
     }
