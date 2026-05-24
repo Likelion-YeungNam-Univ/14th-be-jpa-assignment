@@ -38,4 +38,12 @@ public class Task {
     @JoinColumn(name = "subject_id")
     private Subjects subject;
 
+    void assignUser(User user) {
+        this.user = user;
+    }
+
+    void assignSubject(Subjects subject) {
+        this.subject = subject;
+    }
+
 }

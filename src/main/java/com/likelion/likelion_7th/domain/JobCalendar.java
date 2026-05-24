@@ -1,6 +1,12 @@
 package com.likelion.likelion_7th.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,9 +25,8 @@ public class JobCalendar {
     private LocalDate date;
     private boolean implemented;
 
-    //Builder가 필요한가?
     @Builder
-    public JobCalendar(LocalDate date,boolean implemented){
+    public JobCalendar(LocalDate date, boolean implemented) {
         this.date = date;
         this.implemented = implemented;
     }
@@ -29,4 +34,8 @@ public class JobCalendar {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id")
     private DailyJob dailyJob;
+
+    void assignDailyJob(DailyJob dailyJob) {
+        this.dailyJob = dailyJob;
+    }
 }

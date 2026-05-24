@@ -1,6 +1,14 @@
 package com.likelion.likelion_7th.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter // job_id와 implement를 접근
+@Getter
 public class DailyJob {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +26,7 @@ public class DailyJob {
     private boolean implement;
 
     @Builder
-    public DailyJob(String content, boolean implement){
+    public DailyJob(String content, boolean implement) {
         this.content = content;
         this.implement = implement;
     }
@@ -27,7 +35,17 @@ public class DailyJob {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "job", cascade = CascadeType.ALL) // OneToOne인데 어케 받지? - 일반 객체 타입 선언
+    @OneToOne(mappedBy = "dailyJob", cascade = CascadeType.ALL)
     private JobCalendar jobCalendar;
 
+    void assignUser(User user) {
+        this.user = user;
+    }
+
+    public void assignJobCalendar(JobCalendar jobCalendar) {
+        this.jobCalendar = jobCalendar;
+        if (jobCalendar != null) {
+            jobCalendar.assignDailyJob(this);
+        }
+    }
 }
