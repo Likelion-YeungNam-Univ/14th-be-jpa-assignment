@@ -15,14 +15,14 @@ public class Post {
     @Column(name="id")
     private Long id; //PK
 
-    private String head;
-    private String body;
+    private String title;
+    private String content;
     private Long date;
 
     @Builder
-    public Post(String head, String body, Long date) {
-        this.head = head;
-        this.body = body;
+    public Post(String title, String content, Long date) {
+        this.title = title;
+        this.content = content;
         this.date = date;
     }
 
@@ -30,12 +30,26 @@ public class Post {
     @JoinColumn(name="user_id")
     private User user;
 
-    @OneToMany(mappedBy = "post")
-    private List<Like> like;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> like = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post")
-    private List<Category> category;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Category> category = new ArrayList<>();
+
+    // 연관관계 편의 메서드
+    public void confirmUser(User user) {
+        this.user = user;
+        if (!user.getPosts().contains(this)) {
+            user.getPosts().add(this);
+        }
+    }
+
+    // 수정 메서드
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

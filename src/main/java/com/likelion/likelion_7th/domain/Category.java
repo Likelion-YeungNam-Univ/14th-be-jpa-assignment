@@ -20,4 +20,16 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Builder // 빌더
+    public Category(String category_name) { // 카테고리 생성
+        this.category_name = category_name;
+    }
+
+    public void confirmPost(Post post) { // 게시글 연관관계 설정
+        this.post = post;
+        if (!post.getCategory().contains(this)) {
+            post.getCategory().add(this);
+        }
+    }
 }

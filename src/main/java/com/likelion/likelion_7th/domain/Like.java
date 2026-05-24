@@ -28,4 +28,31 @@ public class Like {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private Comment comment;
+
+    @Builder
+    public Like(Integer like_count) {
+        this.like_count = like_count;
+    }
+
+    // 연관관계 편의 메서드
+    public void confirmUser(User user) {
+        this.user = user;
+        if (!user.getLike().contains(this)) {
+            user.getLike().add(this);
+        }
+    }
+
+    public void confirmPost(Post post) {
+        this.post = post;
+        if (!post.getLike().contains(this)) {
+            post.getLike().add(this);
+        }
+    }
+
+    public void confirmComment(Comment comment) {
+        this.comment = comment;
+        if (!comment.getLike().contains(this)) {
+            comment.getLike().add(this);
+        }
+    }
 }

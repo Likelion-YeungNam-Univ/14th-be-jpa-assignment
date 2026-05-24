@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity //JPA에게 연결 될 수 있음을 알려주는 기능
@@ -20,8 +21,7 @@ public class Comment {
     private String comment_body;
 
     @Builder
-    public Comment(Long id, String comment_body) {
-        this.id = id;
+    public Comment(String comment_body) {
         this.comment_body = comment_body;
     }
 
@@ -33,6 +33,26 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @OneToMany(mappedBy = "comment")
-    private List<Like> like;
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> like = new ArrayList<>();
+
+    // 연관관계 편의 메서드
+    public void confirmUser(User user) {
+        this.user = user;
+        if (!user.getComments().contains(this)) {
+            user.getComments().add(this);
+        }
+    }
+
+    public void confirmPost(Post post) {
+        this.post = post;
+        if (!post.getComments().contains(this)) {
+            post.getComments().add(this);
+        }
+    }
+
+    // 수정 메서드
+    public void update(String comment_body) {
+        this.comment_body = comment_body;
+    }
 }

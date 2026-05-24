@@ -18,13 +18,19 @@ public class User {
     @Column(name="id")
     private Long id; //PK
 
-    private String name;
+    private String username;
     private String password;
     private String email;
 
     @Builder
-    public User(String name, String password, String email) {
-        this.name = name;
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public void update(String username, String password, String email) {
+        this.username = username;
         this.password = password;
         this.email = email;
     }
@@ -34,6 +40,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Like> like;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> like = new ArrayList<>();
 }
