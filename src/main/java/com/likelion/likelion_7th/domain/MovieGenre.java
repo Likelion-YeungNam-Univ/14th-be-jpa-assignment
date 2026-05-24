@@ -1,6 +1,13 @@
 package com.likelion.likelion_7th.domain;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "movie_genre")
 public class MovieGenre {

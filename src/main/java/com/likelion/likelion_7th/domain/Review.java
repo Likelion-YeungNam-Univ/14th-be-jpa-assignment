@@ -1,12 +1,17 @@
 package com.likelion.likelion_7th.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
-// 한 유저가 같은 영화에 리뷰 1개만 가능
 @Table(
         name = "review",
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "movie_id"})

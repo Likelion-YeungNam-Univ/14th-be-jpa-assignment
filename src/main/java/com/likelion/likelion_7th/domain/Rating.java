@@ -1,8 +1,15 @@
 package com.likelion.likelion_7th.domain;
 
-import com.jayway.jsonpath.internal.function.numeric.Min;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 //한 유저가 같은 영화에 별점 1개만 가능
 @Table(
@@ -24,5 +31,6 @@ public class Rating {
     private Movie movie; //별점 받은 영화
 
     @Column(nullable = false)
+    @Min(1) @Max(5)
     private Integer score; //별점 점수
 }
