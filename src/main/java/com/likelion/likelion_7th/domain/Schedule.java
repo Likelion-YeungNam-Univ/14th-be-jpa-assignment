@@ -38,4 +38,13 @@ public class Schedule {
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Participant> participants = new ArrayList<>();
+
+    public void update(String scheduleName, String scheduleMemo,
+                       LocalDateTime scheduleStart, LocalDateTime scheduleEnd, String scheduleType) {
+        this.scheduleName = scheduleName;
+        this.scheduleMemo = scheduleMemo;
+        this.scheduleStart = scheduleStart;
+        this.scheduleEnd = scheduleEnd;
+        this.scheduleType = scheduleType;
+    }
 }

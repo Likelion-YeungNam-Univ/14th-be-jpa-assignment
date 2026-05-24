@@ -25,4 +25,8 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<ProjectUser> projectUsers = new ArrayList<>();
+
+    public void update(String projectName) {
+        this.projectName = projectName;
+    }
 }
