@@ -48,4 +48,8 @@ public class DailyJob {
             jobCalendar.assignDailyJob(this);
         }
     }
+
+    public void updateImplement(boolean implement) {
+        this.implement = implement;
+    }
 }

@@ -46,4 +46,9 @@ public class Task {
         this.subject = subject;
     }
 
+    public void updateTask(LocalDate deadline, boolean status) {
+        this.deadline = deadline;
+        this.status = status;
+    }
+
 }

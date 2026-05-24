@@ -38,4 +38,9 @@ public class JobCalendar {
     void assignDailyJob(DailyJob dailyJob) {
         this.dailyJob = dailyJob;
     }
+
+    public void updateJobCalendar(LocalDate date, boolean implemented) {
+        this.date = date;
+        this.implemented = implemented;
+    }
 }
