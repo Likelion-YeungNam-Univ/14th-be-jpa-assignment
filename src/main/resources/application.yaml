@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Crud_8th
+  datasource:
+    url: jdbc:mysql://localhost:3306/todo_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 0821
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 8080
